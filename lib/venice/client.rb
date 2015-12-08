@@ -11,15 +11,17 @@ module Venice
     attr_writer :shared_secret
 
     class << self
-      def development
+      def development(options = {})
         client = self.new
         client.verification_url = ITUNES_DEVELOPMENT_RECEIPT_VERIFICATION_ENDPOINT
+        client.shared_secret = options[:shared_secret] if options[:shared_secret]
         client
       end
 
-      def production
+      def production(options = {})
         client = self.new
         client.verification_url = ITUNES_PRODUCTION_RECEIPT_VERIFICATION_ENDPOINT
+        client.shared_secret = options[:shared_secret] if options[:shared_secret]
         client
       end
     end
